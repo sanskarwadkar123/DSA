@@ -7,27 +7,19 @@ class Solution {
         int i = 0;
 
         int min = Integer.MAX_VALUE;
-        while(i < n && j < n){
-            if(sum < target){
-                sum += nums[j++];
+        while (j < n) {
+            sum += nums[j];
+
+            while (sum >= target) {
+                min = Math.min(min, j - i + 1);
+                sum -= nums[i];
+                i++;
             }
-            else{
-                min = Math.min(min, (j - i));
-                sum -= nums[i++];
-            }
+
+            j++;
         }
 
-        while(i < n){
-            if(sum >= target){
-                 min = Math.min(min, (j - i));
-                 sum -= nums[i];
-            }
-            i++;
-        }
-
-
-
-        if(min == Integer.MAX_VALUE){
+        if (min == Integer.MAX_VALUE) {
             return 0;
         }
         return min;
